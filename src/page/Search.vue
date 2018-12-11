@@ -28,6 +28,7 @@
                 </div>
             </router-link>
         </ul>
+        <div class="hint" v-if="isHint">未搜索到相关内容</div>
     </div>
 </template>
 <script>
@@ -40,6 +41,7 @@
                     ispageUp:false,
                     isTitle:false,
                 },
+                isHint:false,
                 searchMessage:null,
                 searchList:[],
                 tagList:['海王','云上日出','无名之辈','毒液：致命守护者','狗十三','惊涛飓浪','恐怖快递']
@@ -49,13 +51,23 @@
             headerTop
         },
         methods:{
-            putMessage(){
+            putMessage(content){
+                if(content){
+                    this.searchMessage = content
+                }
                 this.api()
             },
             api(){
                 let url = `/douban/search?tag=${this.searchMessage}&start=0&count=10`
                 this.$http.get(url).then( res => {
+                    if(res.data.subjects.length == 0){
+                        this.isHint = true
+                    }else{
+                        this.isHint = false
+                    }
                     this.searchList = res.data.subjects
+                }).catch(err => {
+                    console.log(err)
                 })
             },
         }
@@ -67,6 +79,9 @@
         flex-wrap: wrap; 
         margin-top: .2rem;
         padding: 0 .1rem;
+    }
+    .hint{
+        text-align: center;
     }
     .tag_list span{
         padding: 5px 15px;

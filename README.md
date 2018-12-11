@@ -1,6 +1,6 @@
 # app-movie
 
-> vue脚手架-移动端豆瓣电影查询
+> Vue2.0实现豆瓣电影webApp
 
 ## Build Setup
 

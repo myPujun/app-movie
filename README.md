@@ -1,6 +1,6 @@
 # app-movie
 
-> vue脚手架-移动端豆瓣电影
+> vue脚手架-移动端豆瓣电影查询
 
 ## Build Setup
 

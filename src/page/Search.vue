@@ -11,28 +11,13 @@
         <div class="tag_list">
             <span v-for="item in tagList" @click="putMessage(item)">{{item}}</span>
         </div>
-        <ul class="movie_list">
-            <router-link :to="{path:'/movieDetails',query:{id:item.id}}" tag="li" class="movie_list_li" 
-            v-for="item in searchList">
-                <div class="images">
-                    <img :src="getImages(item.images.small)" />
-                </div>
-                <div class="message">
-                    <h2 class="name">{{item.title}}</h2>
-                    <ul class="message_list">
-                        <li>时间：<span>{{item.year}}</span></li>
-                        <li>类型：<span v-for="type in item.genres">{{type}}/</span></li>
-                        <li>导演：<span>{{item.directors.name}}</span></li>
-                        <li>评分：<span>{{item.rating.average}}</span></li>
-                    </ul>
-                </div>
-            </router-link>
-        </ul>
+        <movie-list :dataList='searchList'></movie-list>
         <div class="hint" v-if="isHint">未搜索到相关内容</div>
     </div>
 </template>
 <script>
     import headerTop from '@/components/header'
+    import MovieList from '@/components/movieList'
     export default {
         name:'search',
         data(){
@@ -48,7 +33,7 @@
             }
         },
         components:{
-            headerTop
+            headerTop,MovieList
         },
         methods:{
             putMessage(content){
@@ -90,42 +75,6 @@
         font-size: .26rem;
         margin: 5px;
         color: #b1b1b1;
-    }
-    .movie_list{
-        padding: .3rem;
-    }
-    .movie_list_li{
-        display: flex;
-        flex-direction: row;
-        margin-bottom: .3rem;
-    }
-    .movie_list_li .images{
-        width: 2.4rem;
-        height: 3rem;
-        min-width: 2.4rem;
-        min-height: 3rem;
-        margin-right: .3rem;
-        border-radius: 4px;
-        overflow: hidden;
-    }
-    .movie_list_li .images img{
-        width: 100%;
-        height:100%;
-    }
-    .movie_list_li .message .name{
-        font-size: .4rem;
-        line-height: 100%;
-    }
-    .message_list li{
-        font-size: .3rem;
-        margin-top: .05rem;
-    }
-    .message_list li span{
-        font-size: .3rem;
-        color: rgba(0,0,0,.6);
-    }
-    .subhead{
-        margin-left: .2rem;
     }
     .topSearch{
         height: 100%;

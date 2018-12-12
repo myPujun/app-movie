@@ -132,9 +132,13 @@ export default {
      }
      .message .name{
          font-size: .3rem;
+         margin-bottom: .1rem;
      }
      .message .message_list li,.message .message_list li span{
          font-size: .28rem;
+     }
+     .message .message_list li span{
+         color: #7b7b7b;
      }
      .movie_intro .title,.actor_list .title{
          margin-top: .3rem;

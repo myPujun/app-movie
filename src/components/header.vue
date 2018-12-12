@@ -28,7 +28,7 @@
             }
         },
         created() {
-            console.log(this.showState)
+        
         },
     }
 </script>

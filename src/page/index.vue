@@ -1,6 +1,5 @@
 <template>
     <div class="index" ref="indexContent">
-        <header-top :showState="{ispageUp:true,isTitle:true,isSearchIcon:true}"></header-top>
         <ul class="nav_list">
             <li :class="{active:this_Index == index}" 
                 v-for="key,index in navList" 
@@ -27,8 +26,7 @@
     </div>
 </template>
 <script>
-    import headerTop from '@/components/header'
-    export default{
+    export default {
         name:'index',
         data() {
             return {
@@ -41,11 +39,8 @@
                 cacheList:[]
             }
         },
-        components: {
-            headerTop
-        },
         mounted() {
-            let data = this.localGet('indexData',1000*60)
+            let data = this.localGet('indexData')
             if(data == false){
                 this.typeApi()
             }else{
@@ -76,6 +71,7 @@
                 this.$http.get(url).then(res => {
                     this.movieList = res.data.subjects
                     this.isloading = false
+                    this.localSet('indexData',this.movieList)
                 })
             },
             scroll() {
@@ -147,6 +143,7 @@
     .index_movie_list{
         padding-left: .3rem;
         padding-right: .07px;
+        padding-bottom: .98rem;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -179,7 +176,7 @@
         padding: .2rem;
     }
     .message{
-        margin-top: .22rem;
+        margin-top: .1rem;
     }
     .message span{
         font-size: .24rem;

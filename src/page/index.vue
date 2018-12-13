@@ -7,7 +7,7 @@
         </ul>
         <ul class="index_movie_list">
             <router-link tag="li" :to="{path:'/movieDetails',query:{id:item.id}}" 
-            v-for="item in movieList" >
+            v-for="item in message.addList" >
                 <div class="movie_images">
                     <img :src="getImages(item.images.small)"/>
                 </div>
@@ -22,7 +22,6 @@
                 </div> 
             </router-link>
         </ul>
-        <div class="loading" v-show="isloading">加载中...</div>
     </div>
 </template>
 <script>
@@ -34,27 +33,32 @@
                 navList:['动作片','动漫','喜剧片','记录片'],
                 activeMovieType:'动作片',
                 activeMovieStart:0,
-                isloading:false,
-                movieList:[],
-                cacheList:[]
+                cacheList:[],
+                message:{}
             }
         },
         mounted() {
+            this.message = {
+                url: `/douban/search?tag=${this.activeMovieType}&start=${this.activeMovieStart}&count=10`,
+                content:this.$refs.indexContent,
+                activeMovieStart:this.activeMovieStart,
+                addList:this.message.addList,
+                localName:'indexData'
+            }
             let data = this.localGet('indexData')
             if(data == false){
                 this.typeApi()
             }else{
-                this.movieList = data
-                this.isloading = false
+                this.message.addList = data
             }
-            this.scroll()
+            this.scroll(this.message)
         },
         updated () {
-
+           
+            
         },
         methods:{
             changeNav(index,key){
-                localStorage.getItem('indexData')
                 this.this_Index = index
                 this.activeMovieType = key
                 this.typeApi()
@@ -66,36 +70,12 @@
                 }
             },
             typeApi(){
-                this.isloading = true
                 let url = `/douban/search?tag=${this.activeMovieType}&start=${this.movieList}&count=10`
                 this.$http.get(url).then(res => {
-                    this.movieList = res.data.subjects
-                    this.isloading = false
-                    this.localSet('indexData',this.movieList)
+                    this.message.addList = res.data.subjects
+                    this.localSet('indexData',this.message.addList)
                 })
             },
-            scroll() {
-                this.$nextTick(() => { 
-                    window.onscroll = () => {
-                        // 距离底部时加载一次
-                        let content = this.$refs.indexContent
-                        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
-                        if((window.innerHeight + scrollTop)-44 == content.clientHeight){
-                            this.isloading = true
-                            this.activeMovieStart += this.movieList.length
-                            let url = `/douban/search?tag=${this.activeMovieType}&start=${this.activeMovieStart}&count=10`
-                            this.$http.get(url).then(res => {
-                                let list = res.data.subjects
-                                list.forEach((item,index) => {
-                                    this.movieList.push(item)
-                                })
-                                this.isloading = false
-                                this.localSet('indexData',this.movieList)
-                            })
-                        }
-                   }
-                })
-              }
         },
         destroyed(){
             window.onscroll = '' //清空监听事件

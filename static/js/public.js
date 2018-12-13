@@ -18,7 +18,7 @@ exports.install = function (Vue,options){
         let dataObj = JSON.parse(data)
         if(data){
             //超过5分钟删除key里的数据
-            if (new Date().getTime() - dataObj.time > 1000 * 60 * 5) {  
+            if (new Date().getTime() - dataObj.time > 1000) {  
                 localStorage.removeItem(key)
                 return false
             } else {
@@ -37,7 +37,6 @@ exports.install = function (Vue,options){
                 let content = message.content
                 let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
                 if ((window.innerHeight + scrollTop) - 44 == content.clientHeight) {
-                    this.isloading = true
                     message.MovieStart += message.addList.length
                     let url = message.url
                     this.$http.get(url).then(res => {
@@ -45,7 +44,10 @@ exports.install = function (Vue,options){
                         list.forEach((item, index) => {
                             message.addList.push(item)
                         })
-                        this.isloading = false
+                        if(message.localName){
+                            console.log(message.localName)
+                            this.localSet(message.localName, message.addList)
+                        }
                     })
                 }
             }

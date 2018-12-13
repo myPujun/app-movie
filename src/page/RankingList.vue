@@ -1,7 +1,6 @@
 <template>
     <div ref="rankingContent">
         <movie-list :dataList="message.addList"></movie-list>
-        <div class="loading" v-show="isloading">加载中...</div>
     </div>
 </template>
 <script>
@@ -11,7 +10,6 @@
         data(){
             return {
                 activeMovieStart:0,
-                isloading:false,
                 message:{}
             }
         },
@@ -23,12 +21,18 @@
                 url:`/douban/top250?start=${this.activeMovieStart}&count=10`,
                 content:this.$refs.rankingContent,
                 MovieStart:this.activeMovieStart,
-                addList:null
+                addList:null,
+                localName:'rankingList'
             }
-            let url = `/douban/top250?start=0&count=10`
-            this.$http.get(url).then( res => {
-                this.message.addList = res.data.subjects
-            })
+            let data = this.localGet('rankingList')
+            if(data == false){
+                let url = `/douban/top250?start=0&count=10`
+                this.$http.get(url).then( res => {
+                    this.message.addList = res.data.subjects
+                })
+            }else{
+                this.message.addList = data
+            }
             //滑动底部加载数据
             this.scroll(this.message)
         },

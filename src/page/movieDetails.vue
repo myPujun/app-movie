@@ -1,37 +1,37 @@
 <template>
     <div>
         <header-top :showState='showState'></header-top>
-        <div class="movieDetails">
-            <div class="bg_img" :style="{backgroundImage:'url(' + movieMessage.images.small + ')'}"></div>
+        <div class="movieDetails" v-for="item in movieMessage" key="item">
+            <div class="bg_img" :style="{backgroundImage:'url(' + item.images.small + ')'}"></div>
             <div class="details_message">
                 <section class="top_content">
                     <div class="images">
-                        <img :src="getImages(movieMessage.images.small)" alt="">
+                        <img :src="getImages(item.images.small)" alt="">
                     </div>
                     <div class="message">
-                        <h2 class="name">{{movieMessage.title}}</h2>
+                        <h2 class="name">{{item.title}}</h2>
                         <ul class="message_list">
-                            <li>时间：<span>{{movieMessage.year}}</span></li>
-                            <li>类型：<span v-for="item in movieMessage.genres">{{item}}/</span></li>
-                            <li>导演：<span>{{movieMessage.directors[0].name}}</span></li>
-                            <li>评分：<span>{{movieMessage.rating.average}}</span></li>
+                            <li>时间：<span>{{item.year}}</span></li>
+                            <li>类型：<span v-for="item in item.genres">{{item}}/</span></li>
+                            <li>导演：<span>{{item.directors[0].name}}</span></li>
+                            <li>评分：<span>{{item.rating.average}}</span></li>
                         </ul>
                     </div>
                 </section>
                 <div class="movie_intro">
                     <h3 class="title">详情简介</h3>
                     <p class="intro">
-                        {{movieMessage.summary}}
+                        {{item.summary}}
                     </p>
                 </div>
                 <div class="actor_list">
                     <h3 class="title">演职人员</h3>
                     <ul class="list">
-                        <li v-for="item in movieMessage.casts">
+                        <li v-for="value in item.casts">
                             <div class="head">
-                                <img :src="getImages(item.avatars.small)" alt="">
+                                <img :src="getImages(value.avatars.small)" alt="">
                             </div>
-                            <h2 class="name">{{item.name}}</h2>
+                            <h2 class="name">{{value.name}}</h2>
                         </li>
                     </ul>
                 </div>
@@ -50,7 +50,7 @@ export default {
                 isTitle:true,
                 title:null
             },
-            movieMessage:{}
+            movieMessage:[]
         }
     },
     created () {
@@ -61,16 +61,18 @@ export default {
     },
     methods: {
         api(){
-            let _this = this
             let url = `/douban/subject/${this.$route.query.id}`
             this.$http.get(url).then( res => {
-                _this.$nextTick(function(){
-                    _this.movieMessage = res.data
-                    _this.showState.title = res.data.title
+                 this.$nextTick(()=>{
+                     this.movieMessage.push(res.data)
+                    // this.$set(this.movieMessage,0,res.data)
+                    this.showState.title = res.data.title
+                    console.log(this.movieMessage)
                 })
             }).catch(err => {
                 console.log(err)
             })
+            
         }
     }
 }

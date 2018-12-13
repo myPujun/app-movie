@@ -1,10 +1,15 @@
 <template>
     <div class="index" ref="indexContent">
-        <ul class="nav_list">
-            <li :class="{active:this_Index == index}" 
-                v-for="key,index in navList" 
-                @click="changeNav(index,key)">{{key}}</li>
-        </ul>
+        <div class="nav_wrap">
+            <div class="nav_content">
+                <ul class="nav_list">
+                    <li :class="{active:this_Index == index}" 
+                        v-for="key,index in navList" 
+                        @click="changeNav(index,key)">{{key}}
+                    </li>
+                </ul>
+            </div>
+        </div>
         <ul class="index_movie_list">
             <router-link tag="li" :to="{path:'/movieDetails',query:{id:item.id}}" 
             v-for="item in message.addList" >
@@ -30,7 +35,8 @@
         data() {
             return {
                 this_Index: 0 ,
-                navList:['动作片','动漫','喜剧片','记录片'],
+                navList:['动作','喜剧','剧情','爱情','科幻','动画','悬疑','惊悚','恐怖','犯罪','同性','音乐','歌舞','传记','历史','战争','西部','奇幻','冒险','灾难','武侠','情色'],
+                
                 activeMovieType:'动作片',
                 activeMovieStart:0,
                 cacheList:[],
@@ -46,7 +52,7 @@
                 localName:'indexData'
             }
             let data = this.localGet('indexData')
-            if(data == false){
+            if (data == false) {
                 this.typeApi()
             }else{
                 this.message.addList = data
@@ -55,7 +61,6 @@
         },
         updated () {
            
-            
         },
         methods:{
             changeNav(index,key){
@@ -83,6 +88,7 @@
     }
 </script>
 <style scoped>
+
     .loading{
         position: fixed;
         top: 50%;
@@ -97,14 +103,31 @@
         line-height: 1rem;
         color: #FFF;
     }
+    .nav_wrap{
+        position: relative;
+        height: 1rem;
+    }
+    .nav_content{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 0 .3rem;
+        overflow: hidden;
+        height: 1rem;
+    }
     .nav_list{
+        overflow: hidden;
+        overflow-x: auto;
         display: flex;
-        justify-content: space-around;
-        
+        height: 100%;
+        align-items: center;
     }
     .nav_list li{
         color: #999;
-        padding: .4rem .1rem .25rem .1rem;
+        flex: 0 0 22%;
+        text-align: center;
+        line-height: 1rem;
         font-size: .28rem;
     }
     .nav_list li.active{

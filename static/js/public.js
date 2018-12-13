@@ -1,4 +1,3 @@
-
 exports.install = function (Vue,options){
     //缓存网络图片
     Vue.prototype.getImages = function (_url){
@@ -18,7 +17,7 @@ exports.install = function (Vue,options){
         let dataObj = JSON.parse(data)
         if(data){
             //超过5分钟删除key里的数据
-            if (new Date().getTime() - dataObj.time > 1000) {  
+            if (new Date().getTime() - dataObj.time > 1000*60*5) {  
                 localStorage.removeItem(key)
                 return false
             } else {
@@ -45,7 +44,6 @@ exports.install = function (Vue,options){
                             message.addList.push(item)
                         })
                         if(message.localName){
-                            console.log(message.localName)
                             this.localSet(message.localName, message.addList)
                         }
                     })

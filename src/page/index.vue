@@ -12,7 +12,7 @@
         </div>
         <ul class="index_movie_list">
             <router-link tag="li" :to="{path:'/movieDetails',query:{id:item.id}}" 
-            v-for="item in message.addList" >
+            v-for="item in message.addList">
                 <div class="movie_images">
                     <img :src="getImages(item.images.small)"/>
                 </div>
@@ -45,9 +45,8 @@
         },
         mounted() {
             this.message = {
-                url: `/douban/search?tag=${this.activeMovieType}&start=${this.activeMovieStart}&count=10`,
-                content:this.$refs.indexContent,
-                activeMovieStart:this.activeMovieStart,
+                MovieStart:this.activeMovieStart,
+                url: `search?tag=${this.activeMovieType}`,
                 addList:this.message.addList,
                 localName:'indexData'
             }
@@ -75,7 +74,7 @@
                 }
             },
             typeApi(){
-                let url = `/douban/search?tag=${this.activeMovieType}&start=${this.movieList}&count=10`
+                let url = `/douban/search?tag=${this.activeMovieType}&start=${this.activeMovieStart}&count=10`
                 this.$http.get(url).then(res => {
                     this.message.addList = res.data.subjects
                     this.localSet('indexData',this.message.addList)

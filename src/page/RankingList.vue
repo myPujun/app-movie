@@ -18,8 +18,7 @@
         },
         mounted (){
             this.message = {
-                url:`/douban/top250?start=${this.activeMovieStart}&count=10`,
-                content:this.$refs.rankingContent,
+                url:`/top250?`,
                 MovieStart:this.activeMovieStart,
                 addList:null,
                 localName:'rankingList'
@@ -29,6 +28,7 @@
                 let url = `/douban/top250?start=0&count=10`
                 this.$http.get(url).then( res => {
                     this.message.addList = res.data.subjects
+                    this.localSet('rankingList',this.message.addList)
                 })
             }else{
                 this.message.addList = data

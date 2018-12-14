@@ -1,6 +1,6 @@
 <template>
     <div class="showing">
-        <movie-list :dataList="showingList"></movie-list>
+        <movie-list :dataList="message.addList"></movie-list>
     </div>
 </template>
 <script>
@@ -10,24 +10,33 @@
         data(){
             return {
                 showingList:[],
-                ctiy:'广州'
+                ctiy:'广州',
+                activeMovieStart:0,
+                message:{}
             }
         },
         components:{
             MovieList
         },
         created() {
+            this.message = {
+                url:`/in_theaters?city=广州`,
+                MovieStart:this.activeMovieStart,
+                addList:this.message.addList,
+                localName:'showing'
+            }
             let data = this.localGet('showing')
             if(data == false){
-                let url = `/douban/in_theaters?city=广州&start=0&count=20`
+                let url = '/douban/in_theaters?city=广州&start=0&count=10'
                 this.$http.get(url).then( res => {
-                    this.showingList = res.data.subjects
-                    this.localSet('showing',this.showingList)
+                    this.activeMovieStart+=10
+                    this.message.addList = res.data.subjects
+                    this.localSet('showing',this.message.addList)
                 })
             }else{
-                this.showingList = data
+                this.message.addList = data
             }
-            
+            this.scroll(this.message)
         },
     }
 </script>

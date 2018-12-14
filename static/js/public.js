@@ -33,11 +33,11 @@ exports.install = function (Vue,options){
         this.$nextTick(() => {
             window.onscroll = () => {
                 // 距离底部时加载一次
-                let content = message.content
+                let bodyContent = document.body.offsetHeight
                 let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
-                if ((window.innerHeight + scrollTop) - 44 == content.clientHeight) {
-                    message.MovieStart += message.addList.length
-                    let url = message.url
+                if ((window.innerHeight + scrollTop) == bodyContent) {
+                    message.MovieStart += 10
+                    let url = `/douban${message.url}&start=${message.MovieStart}&count=10`
                     this.$http.get(url).then(res => {
                         let list = res.data.subjects
                         list.forEach((item, index) => {

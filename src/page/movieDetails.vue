@@ -64,7 +64,7 @@ export default {
             let url = `/douban/subject/${this.$route.query.id}`
             this.$http.get(url).then( res => {
                  this.$nextTick(()=>{
-                     this.movieMessage.push(res.data)
+                    this.movieMessage.push(res.data)
                     // this.$set(this.movieMessage,0,res.data)
                     this.showState.title = res.data.title
                     console.log(this.movieMessage)

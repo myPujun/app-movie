@@ -29,11 +29,29 @@
                 isHint:false,
                 searchMessage:null,
                 searchList:[],
-                tagList:['海王','云上日出','无名之辈','毒液：致命守护者','狗十三','惊涛飓浪','恐怖快递']
+                tagList:[]
             }
         },
         components:{
             headerTop,MovieList
+        },
+        mounted() {
+            let localData = this.localGet('searchShowing')
+            if(localData == false){
+                let url = `/douban/in_theaters?city=广州&start=0&count=10`
+                this.$http.get(url).then( res => {
+                    let data = res.data.subjects
+                    data.forEach((key,index) => {
+                        this.tagList.push(key.title) 
+                    })
+                    this.localSet('searchShowing',this.tagList)
+                }).catch(err => {
+                    alert(err)
+                })
+            }else{
+                this.tagList = localData
+            }
+            
         },
         methods:{
             putMessage(content){
@@ -55,6 +73,13 @@
                     console.log(err)
                 })
             },
+        },
+        directives: {
+            focus:{
+                inserted:function(el){
+                    el.focus()
+                }
+            }
         }
     }
 </script>

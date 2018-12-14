@@ -78,6 +78,8 @@
                 this.$http.get(url).then(res => {
                     this.message.addList = res.data.subjects
                     this.localSet('indexData',this.message.addList)
+                }).catch( err => {
+                    
                 })
             },
         },

@@ -89,21 +89,6 @@
     }
 </script>
 <style scoped>
-
-    .loading{
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        width: 2rem;
-        height: 1rem;
-        margin-top: -.5rem;
-        margin-left: -1rem;
-        background-color: rgba(0,0,0,.75);
-        border-radius: 4px;
-        text-align: center;
-        line-height: 1rem;
-        color: #FFF;
-    }
     .nav_wrap{
         position: relative;
         height: 1rem;

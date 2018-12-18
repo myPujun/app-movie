@@ -1,12 +1,12 @@
 <template>
     <header class="header_top">
         <div class="classify" >
-            <img src="../../static/img/classify.png" alt="" v-if="showState.ispageUp">
+            <img src="../../static/img/classify.png" alt="" v-if="showState.ispageUp" @click="isMenu">
             <img src="../../static/img/back.png" alt="" @click="$router.back(-1)" v-else>
         </div>
         <div class="top_title">
             <slot name="search"></slot>
-            <h2 class="title" v-if="showState.isTitle">{{showState.title || '电影'}}</h2>
+            <h2 class="title" v-if="showState.isTitle">{{showState.title || '豆瓣电影'}}</h2>
         </div>
         <router-link to="/search" class="search" v-if="showState.isSearchIcon">
             <img src="../../static/img/search.png"/>
@@ -14,6 +14,7 @@
     </header>
 </template>
 <script>
+    import bus from '../../static/js/bus'
     export default {
         name:'headerTop',
         data(){
@@ -29,6 +30,11 @@
         },
         created() {
         
+        },
+        methods: {
+            isMenu(){
+                bus.$emit('showMenu',true)
+            }
         },
     }
 </script>
@@ -66,7 +72,7 @@
     .top_title .title{
         line-height:.88rem; 
         font-size: .36rem;
-        color: #333;
+        color: #a975c7;
         font-weight: normal;
     }
     .header_top .search{

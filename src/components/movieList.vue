@@ -11,8 +11,8 @@
                     <ul class="message_list">
                         <li>时间：<span>{{item.year}}</span></li>
                         <li>类型：<span v-for="type in item.genres">{{type}}/</span></li>
-                        <li>导演：<span>{{item.directors[0].name}}</span></li>
-                        <li>评分：<span>{{item.rating.average}}</span></li>
+                        <li>导演：<span v-for="key in item.directors">{{key.name}}</span></li>
+                        <li>评分：<span class="rating">{{item.rating.average}}</span></li>
                     </ul>
                 </div>
             </router-link>
@@ -64,5 +64,10 @@
     .message_list li span{
         font-size: .3rem;
         color: rgba(0,0,0,.6);
+    }
+    .message_list li span.rating{
+        color: #a975c7;
+        font-size: .34rem;
+        font-weight: bold;
     }
 </style>

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 
+//登录界面
+import Register from '@/page/Register'
 //Home
 import Home from '@/page/Home'
 //首页
@@ -26,9 +28,9 @@ export default new Router({
             component:Home,
         },
         {
-        path: '/index',
-        name: 'index',
-        component: Index
+            path: '/index',
+            name: 'index',
+            component: Index
         },
         {
             path:'/search',
@@ -49,6 +51,11 @@ export default new Router({
             path:'/rankingList',
             name:'RankingList',
             component: RankingList
+        },
+        {
+            path:'/register',
+            name:'register',
+            component: Register
         }
     ]
 })

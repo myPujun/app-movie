@@ -14,15 +14,12 @@
             <ul class="menu_list">
                 <li>想看的电影</li>
                 <li>看过的电影</li>
-                <li>我的优惠卷</li>
                 <li>修改密码</li>
-                <li>修改手机号</li>
                 <li>帮助与反馈</li>
-                <li>消息通知</li>
                 <li>联系我们</li>
                 <li>关于我们</li>
-                <li class="drop_out">退出登录</li>
             </ul>
+            <router-link to="/register" class="drop_out" @click="isMenu = !isMenu">退出登录</router-link> 
         </div>
     </div>
     </transition>
@@ -59,6 +56,7 @@
         z-index: 999;
     }
     .left_menu{
+        position: relative;
         width: 5rem;
         height: 100%;
         background-color: #FFF;
@@ -88,7 +86,6 @@
         margin-bottom: .1rem;
     }
     .person_message .Member_Level{
-        font-size: .28rem;
         color: #a975c7;
         display: flex;
         align-items: center;
@@ -126,6 +123,10 @@
         background-position: center;
     }
     .drop_out{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         padding: .3rem 0 .3rem .6rem;
         color: #a975c7;
     }

@@ -4,7 +4,7 @@
             <template slot="search" >
                 <div class="topSearch">
                     <input type="text" placeholder="请输入搜索内容" v-model="searchMessage">
-                    <input type="button" value="" class="searchSubmit" @click="putMessage">
+                    <input type="button" value="" class="searchSubmit" @click="putMessage(searchMessage)">
                 </div>
             </template>
         </header-top>
@@ -12,7 +12,7 @@
             <span v-for="item in tagList" @click="putMessage(item)">{{item}}</span>
         </div>
         <movie-list :dataList='searchList'></movie-list>
-        <div class="hint" v-if="isHint">未搜索到相关内容</div>
+        <div class="hint" v-if="isHint">{{hintText}}</div>
     </div>
 </template>
 <script>
@@ -29,7 +29,8 @@
                 isHint:false,
                 searchMessage:null,
                 searchList:[],
-                tagList:[]
+                tagList:[],
+                hintText:'未搜索到相关内容'
             }
         },
         components:{
@@ -57,8 +58,11 @@
             putMessage(content){
                 if(content){
                     this.searchMessage = content
+                    this.api()
+                }else{
+                    this.isHint = true
                 }
-                this.api()
+                
             },
             api(){
                 let url = `/douban/search?tag=${this.searchMessage}&start=0&count=10`

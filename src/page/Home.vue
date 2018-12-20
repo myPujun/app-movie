@@ -31,7 +31,7 @@
             headerTop,FooterNav,Index,Showing,RankingList,LeftMenu
         },
         created () {
-
+            
         },
         methods:{
             changeLink(val){

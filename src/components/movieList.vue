@@ -2,7 +2,7 @@
     <div>
         <ul class="movie_list">
             <router-link :to="{path:'/movieDetails',query:{id:item.id}}" tag="li" class="movie_list_li" 
-            v-for="item in dataList">
+            v-for="item,index in dataList" :key="index">
                 <div class="images">
                     <img :src="getImages(item.images.small)" />
                 </div>

@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
         <ul class="footer_list">
-            <router-link tag="li" v-for="item,index in footerList" to=""
+            <router-link tag="li" v-for="item,index in footerList" to="" :key="index"
             :class="{active:activeIndex == index}" @click.native="changeActive(index,item.link)">
                 <p class="title">{{item.title}}</p>
             </router-link>
@@ -33,7 +33,8 @@
         methods: {
             changeActive(index,link){
                 this.activeIndex = index
-                this.$emit('changeView',link)
+                this.$emit('changeView',link) 
+
             }
         }
     }

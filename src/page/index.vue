@@ -5,14 +5,15 @@
                 <ul class="nav_list">
                     <li :class="{active:this_Index == index}" 
                         v-for="key,index in navList" 
-                        @click="changeNav(index,key)">{{key}}
+                        @click="changeNav(index,key)" :key="index">
+                        {{key}}
                     </li>
                 </ul>
             </div>
         </div>
         <ul class="index_movie_list">
             <router-link tag="li" :to="{path:'/movieDetails',query:{id:item.id}}" 
-            v-for="item in message.addList">
+            v-for="item,index in message.addList" :key="index">
                 <div class="movie_images">
                     <img :src="getImages(item.images.small)"/>
                 </div>

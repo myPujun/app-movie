@@ -16,8 +16,8 @@
     </div>
 </template>
 <script>
-    import headerTop from '@/components/header'
-    import MovieList from '@/components/movieList'
+    import headerTop from '@/components/Header'
+    import MovieList from '@/components/MovieList'
     export default {
         name:'search',
         data(){

@@ -27,12 +27,12 @@
                 <div class="actor_list">
                     <h3 class="title">演职人员</h3>
                     <ul class="list">
-                        <li v-for="value in item.casts">
+                        <router-link tag="li" :to="{path:'/actorDetails',query:{id:value.id}}" v-for="value,index in item.casts" :key="index">
                             <div class="head">
                                 <img :src="getImages(value.avatars.small)" alt="">
                             </div>
                             <h2 class="name">{{value.name}}</h2>
-                        </li>
+                        </router-link>
                     </ul>
                 </div>
             </div>
@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-import headerTop from '@/components/header'
+import headerTop from '@/components/Header'
 export default {
     name:'movieDetails',
     data(){
@@ -85,7 +85,6 @@ export default {
         position: relative;
         height: 5rem;
         background-color: #ccc;
-        
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

@@ -4,7 +4,7 @@
         <input type="text" placeholder="请输入手机号码">
         <input type="password" placeholder="请输入密码">
         <input type="submit" value="登录">
-        <a href="javascript:;" class="forget">忘记密码</a>
+        <router-link to="/retrieve" class="forget">忘记密码</router-link>
     </form>
     </div>
 </template>

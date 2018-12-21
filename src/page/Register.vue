@@ -8,7 +8,7 @@
     </div>
 </template>
 <script>
-    import Login from '@/components/login'
+    import Login from '@/components/Login'
     import Enroll from '@/components/Enroll'
     export default {
         name:'register',

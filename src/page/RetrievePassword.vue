@@ -1,23 +1,35 @@
 <template>
-    <form @submit.prevent="" class="sheet">
-        <input type="text" placeholder="请输入手机号码">
-        <label for="">
-            <input type="text" placeholder="请输入验证码">
-            <span>获取验证码</span>
-        </label>
-        <input type="password" placeholder="请输入密码">
-        <input type="submit" value="注册">
-    </form>
+    <div class="retrieve_password">
+        <header-top :showState="showState"></header-top>
+        <form @submit.prevent="" class="sheet">
+            <input type="text" placeholder="请输入手机号码">
+            <label for="">
+                <input type="text" placeholder="请输入验证码">
+                <span>获取验证码</span>
+            </label>
+            <input type="password" placeholder="请重设密码">
+            <input type="submit" value="确定">
+        </form>
+    </div>
 </template>
 <script>
-    export default {
-        name:'enroll',
-        data(){
-            return {
-
+import headerTop from '@/components/Header'
+export default {
+    name:'retrieve',
+    data(){
+        return {
+            showState:{
+                ispageUp:false,
+                isTitle:true,
+                title:'找回密码',
+                isSearchIcon:false
             }
         }
+    },
+    components:{
+        headerTop
     }
+}
 </script>
 <style scoped>
     .sheet{
@@ -72,3 +84,6 @@
         box-shadow: 0px 5px 10px rgba(169,117,199,.3)
     }
 </style>
+
+
+

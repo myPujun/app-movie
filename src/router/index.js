@@ -16,6 +16,10 @@ import MovieDetails from '@/page/movieDetails'
 import Showing from '@/page/Showing'
 //Top250
 import RankingList from '@/page/RankingList'
+//找回密码
+import Retrieve from '@/page/RetrievePassword'
+//演员详情
+import ActorDetails from '@/page/ActorDetails'
 
 Vue.use(Router)
 
@@ -56,6 +60,16 @@ export default new Router({
             path:'/register',
             name:'register',
             component: Register
+        },
+        {
+            path:'/retrieve',
+            name:'retrieve',
+            component: Retrieve
+        },
+        {
+            path:'/actorDetails',
+            name:'actorDetails',
+            component: ActorDetails
         }
     ]
 })

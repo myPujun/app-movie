@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-    import MovieList from '@/components/movieList'
+    import MovieList from '@/components/MovieList'
     export default {
         name:'showing',
         data(){

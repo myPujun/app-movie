@@ -10,11 +10,11 @@
 </template>
 
 <script>
-    import headerTop from '@/components/header'
-    import FooterNav from '@/components/footer'
+    import headerTop from '@/components/Header'
+    import FooterNav from '@/components/Footer'
     import LeftMenu from '@/components/LeftMenu'
-    import Index from '@/page/index'
-    import Showing from '@/page/showing'
+    import Index from '@/page/Index'
+    import Showing from '@/page/Showing'
     import RankingList from '@/page/RankingList'
 
     export default {

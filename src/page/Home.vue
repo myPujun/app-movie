@@ -36,8 +36,14 @@
         methods:{
             changeLink(val){
                 this.changeName = val
+                let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
+                if(scrollTop > 0){
+                    document.body.scrollTop = 0
+                    document.documentElement.scrollTop = 0
+                    window.pageYOffset = 0
+                }
             }
-        }
+        },
     }
 </script>
 <style scoped>

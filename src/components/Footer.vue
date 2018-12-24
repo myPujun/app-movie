@@ -34,7 +34,6 @@
             changeActive(index,link){
                 this.activeIndex = index
                 this.$emit('changeView',link) 
-
             }
         }
     }
@@ -53,6 +52,12 @@
         height: 100%;
         justify-content:space-evenly;
         align-items: center;
+    }
+    .footer_list li{
+        flex: 3;
+        height: 100%;
+        line-height: .98rem;
+        text-align: center;
     }
     .footer_list li .title{
         color: #999;

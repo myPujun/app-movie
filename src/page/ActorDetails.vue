@@ -9,7 +9,6 @@
                 <h2 class="name">{{actrorMessage.name}}（{{actrorMessage.born_place}}）</h2>
                 <p class="nationality">{{actrorMessage.name_en}}</p>
             </div>
-            
         </div>
        <movie-list :dataList='ParticipatingList'></movie-list>
     </div>
@@ -32,11 +31,12 @@ export default {
         }
     },
     created () {
-        let url = `/douban/celebrity/${this.$route.query.id}`  
-        this.$http.get(url).then(res => {
-            this.actrorMessage = res.data
+        let url = `/celebrity/${this.$route.query.id}`  
+        this.Api(url).then(data => {
+            this.actrorMessage = data
             let _this = this
-            res.data.works.forEach((key,index) => {
+            console.log(this.actrorMessage)
+            data.works.forEach((key,index) => {
                 _this.ParticipatingList.push(key.subject)
             })
         })

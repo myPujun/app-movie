@@ -17,7 +17,11 @@
                             <li>评分：<span>{{item.rating.average}}</span></li>
                         </ul>
                     </div>
-                </section>
+                </section> 
+                <ul class="subject_mark">
+                    <li>想看({{item.wish_count}})</li>
+                    <li>看过({{item.reviews_count}})</li>
+                </ul>
                 <div class="movie_intro">
                     <h3 class="title">详情简介</h3>
                     <p class="intro">
@@ -59,15 +63,13 @@ export default {
     components:{
         headerTop
     },
-    methods: {
+    methods: {  
         api(){
-            let url = `/douban/subject/${this.$route.query.id}`
-            this.$http.get(url).then( res => {
-                 this.$nextTick(()=>{
-                    this.movieMessage.push(res.data)
-                    // this.$set(this.movieMessage,0,res.data)
-                    this.showState.title = res.data.title
-                    console.log(this.movieMessage)
+            let url = `/subject/${this.$route.query.id}`
+            this.Api(url).then( data => {
+                this.$nextTick(()=>{
+                    this.movieMessage.push(data)
+                    this.showState.title = data.title
                 })
             }).catch(err => {
                 console.log(err)
@@ -150,6 +152,23 @@ export default {
          font-size: .26rem;
          line-height: .45rem;
          color: #7b7b7b;
+     }
+     .subject_mark{
+         margin-top: .3rem;
+         display: flex;
+     }
+     .subject_mark li{
+         flex: 2;
+         text-align: center;
+         border: 1px solid #a975c7;
+         padding: 6px 12px;
+         color: #a975c7;
+         margin: 0 5px;
+         border-radius: 20px;
+     }
+     .subject_mark li:first-child{
+         background-color: #a975c7;
+         color: #FFF;
      }
      .actor_list .list{
          margin-top: .2rem;

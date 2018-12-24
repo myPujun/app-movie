@@ -75,17 +75,14 @@
                 }
             },
             typeApi(){
-                let url = `/douban/search?tag=${this.activeMovieType}&start=${this.activeMovieStart}&count=10`
-                this.$http.get(url).then(res => {
-                    this.message.addList = res.data.subjects
+                let url = `/search?tag=${this.activeMovieType}&start=${this.activeMovieStart}&count=10`
+                this.Api(url).then(data => {
+                    this.message.addList = data.subjects
                     this.localSet('indexData',this.message.addList)
                 }).catch( err => {
                     
                 })
             },
-        },
-        destroyed(){
-            window.onscroll = '' //清空监听事件
         },
     }
 </script>

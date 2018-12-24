@@ -27,10 +27,10 @@
             }
             let data = this.localGet('showing')
             if(data == false){
-                let url = '/douban/in_theaters?city=广州&start=0&count=10'
-                this.$http.get(url).then( res => {
+                let url = '/in_theaters?city=广州&start=0&count=10'
+                this.Api(url).then( data => {
                     this.activeMovieStart+=10
-                    this.message.addList = res.data.subjects
+                    this.message.addList = data.subjects
                     this.localSet('showing',this.message.addList)
                 })
             }else{

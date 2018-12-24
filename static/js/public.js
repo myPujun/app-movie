@@ -1,4 +1,15 @@
 exports.install = function (Vue,options){
+    //API接口
+    Vue.prototype.Api = function (url) {
+        var url = `/douban${url}`
+        return new Promise((resolve, reject) => {
+            this.$http.get(url).then(res => {
+                resolve(res.data)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    }
     //缓存网络图片
     Vue.prototype.getImages = function (_url){
         if (_url !== undefined) {
@@ -37,9 +48,9 @@ exports.install = function (Vue,options){
                 let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
                 if ((window.innerHeight + scrollTop) == bodyContent) {
                     message.MovieStart += 10
-                    let url = `/douban${message.url}&start=${message.MovieStart}&count=10`
-                    this.$http.get(url).then(res => {
-                        let list = res.data.subjects
+                    let url = `${message.url}&start=${message.MovieStart}&count=10`
+                    this.Api(url).then(res => {
+                        let list = res.subjects
                         list.forEach((item, index) => {
                             message.addList.push(item)
                         })
@@ -51,6 +62,7 @@ exports.install = function (Vue,options){
             }
         })
     }
+    
 }
 
 

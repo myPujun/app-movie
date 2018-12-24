@@ -39,9 +39,9 @@
         mounted() {
             let localData = this.localGet('searchShowing')
             if(localData == false){
-                let url = `/douban/in_theaters?city=广州&start=0&count=10`
-                this.$http.get(url).then( res => {
-                    let data = res.data.subjects
+                let url = `/in_theaters?city=广州&start=0&count=10`
+                this.Api(url).then( res => {
+                    let data = res.subjects
                     data.forEach((key,index) => {
                         this.tagList.push(key.title) 
                     })

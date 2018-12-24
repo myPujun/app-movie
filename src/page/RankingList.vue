@@ -25,9 +25,9 @@
             }
             let data = this.localGet('rankingList')
             if(data == false){
-                let url = `/douban/top250?start=0&count=10`
-                this.$http.get(url).then( res => {
-                    this.message.addList = res.data.subjects
+                let url = `/top250?start=0&count=10`
+                this.Api(url).then( data => {
+                    this.message.addList = data.subjects
                     this.localSet('rankingList',this.message.addList)
                 })
             }else{

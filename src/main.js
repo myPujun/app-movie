@@ -18,10 +18,8 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = Axios
 
-
 Vue.use(publicJs)
 Vue.use(Loading)
-
 
 /* eslint-disable no-new */
 new Vue({

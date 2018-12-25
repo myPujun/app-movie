@@ -18,4 +18,7 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+最后打开浏览器，输入`localhost:8880`即可访问。效果图如下：
+
+![text](../master/static/flat_patternmaking.gif)
+

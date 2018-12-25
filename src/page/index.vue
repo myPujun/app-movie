@@ -11,6 +11,17 @@
                 </ul>
             </div>
         </div>
+        <div class="banner swiper-container" >
+            <ul class="banner_list swiper-wrapper">
+                <li class="swiper-slide">
+                    <img src="../../static/img/banner_1.jpg" alt="">
+                </li>
+                <li class="swiper-slide">
+                    <img src="../../static/img/banner_2.jpg" alt="">
+                </li>
+            </ul>
+            <div class="swiper-pagination"></div>
+        </div>
         <ul class="index_movie_list">
             <router-link tag="li" :to="{path:'/movieDetails',query:{id:item.id}}" 
             v-for="item,index in message.addList" :key="index">
@@ -31,6 +42,9 @@
     </div>
 </template>
 <script>
+    //swiper插件
+    import Swiper from 'swiper'
+    import 'swiper/dist/css/swiper.css';
     export default {
         name:'index',
         data() {
@@ -57,6 +71,17 @@
             }else{
                 this.message.addList = data
             }
+            //Swiper实列
+            new Swiper('.swiper-container',{
+                autoplay:{
+                    disableOnInteraction:false
+                },
+                loop:true,
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            })
+
             this.scroll(this.message)
         },
         updated () {
@@ -87,6 +112,13 @@
     }
 </script>
 <style scoped>
+    .banner{
+        margin-top: .23rem;
+    }
+    .banner_list li{
+        height: 3rem;
+        background-color: #ccc;
+    }
     .nav_wrap{
         position: relative;
         height: 1rem;
@@ -124,7 +156,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: .05rem;
+        height: .08rem;
         background-color: #a975c7;
     }
     .index_movie_list{
@@ -153,8 +185,8 @@
     }
     .movie_name{
         font-weight: normal;
-        font-size: .24rem;
-        color: #333;
+        font-size: .28rem;
+        color: #a975c7;
     }
     .type{
         line-height: 100%;
@@ -173,5 +205,65 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        
     }
 </style>
+<style>
+    .swiper-pagination-bullet{
+        position: relative;
+        background:rgba(218,154,255,.3);
+        border:1px solid #FFF;
+        opacity: 1;
+    }
+    .swiper-pagination-bullet-active{
+        border-radius: 6px;
+        width:.5rem;
+        animation:myfirst .3s;
+        -moz-animation:myfirst .3s; /* Firefox */
+        -webkit-animation:myfirst .3s; /* Safari and Chrome */
+        -o-animation:myfirst .3s; /* Opera */
+    }
+    .swiper-pagination-bullet-active:after{
+        position: absolute;
+        content:'';
+        background:#FFF;
+        left: .05rem;
+        right: .05rem;
+        top:1px;
+        height: 6px;
+        border-radius: 6px;
+    }
+    @keyframes myfirst
+    {
+        0%   {width:.1rem;opacity: .2;}
+        25%  {width:.2rem;opacity: .4;}
+        50%  {width:.3rem;opacity: .6;}
+        75%  {width:.4rem;opacity: .8;}
+        100% {width:.5rem;opacity: 1;}
+    }
+    @-moz-keyframes myfirst
+    {
+        0%   {width:.1rem;opacity: .2;}
+        25%  {width:.2rem;opacity: .4;}
+        50%  {width:.3rem;opacity: .6;}
+        75%  {width:.4rem;opacity: .8;}
+        100% {width:.5rem;opacity: 1;}
+    }
+    @-webkit-keyframes myfirst
+    {
+        0%   {width:.1rem;opacity: .2;}
+        25%  {width:.2rem;opacity: .4;}
+        50%  {width:.3rem;opacity: .6;}
+        75%  {width:.4rem;opacity: .8;}
+        100% {width:.5rem;opacity: 1;}
+    }
+    @-o-keyframes myfirst
+    {
+        0%   {width:.1rem;opacity: .2;}
+        25%  {width:.2rem;opacity: .4;}
+        50%  {width:.3rem;opacity: .6;}
+        75%  {width:.4rem;opacity: .8;}
+        100% {width:.5rem;opacity: 1;}
+    }
+</style>
+

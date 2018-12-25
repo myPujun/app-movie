@@ -14,6 +14,7 @@ import '../static/css/base.css'
 //css公用样式
 import '../static/css/public.css'
 
+
 Vue.config.productionTip = false
 
 Vue.prototype.$http = Axios

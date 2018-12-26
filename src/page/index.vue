@@ -32,11 +32,13 @@
                     <h2 class="movie_name">{{item.title}}</h2>
                     <div class="message">
                         <p class="type">
-                            <span v-for="genre in item.genres">{{genre+'/'}}</span>
+                            <span v-for="genre in item.genres">{{genre}}</span>
                         </p>
-                        <span class="grade">评分：{{item.rating.average}}</span>
                     </div>
                 </div> 
+                <div class="grade">
+                    {{item.rating.average | filterGrade}}
+                </div>
             </router-link>
         </ul>
     </div>
@@ -51,11 +53,21 @@
             return {
                 this_Index: 0 ,
                 navList:['动作','喜剧','剧情','爱情','科幻','动画','悬疑','惊悚','恐怖','犯罪','同性','音乐','歌舞','传记','历史','战争','西部','奇幻','冒险','灾难','武侠','情色'],
-                
-                activeMovieType:'动作片',
+                activeMovieType:'动作',
                 activeMovieStart:0,
                 cacheList:[],
                 message:{}
+            }
+        },
+        watch: {
+            activeMovieType(newValue,old){
+                this.message = {
+                    MovieStart:this.activeMovieStart,
+                    url: `search?tag=${newValue}`,
+                    addList:this.message.addList,
+                    localName:'indexData'
+                }
+                this.scroll(this.message)
             }
         },
         mounted() {
@@ -81,10 +93,12 @@
                     el: '.swiper-pagination',
                 },
             })
-
             this.scroll(this.message)
         },
         updated () {
+
+        },
+        beforeDestroy() {
            
         },
         methods:{
@@ -168,12 +182,28 @@
         flex-wrap: wrap;
     }
     .index_movie_list li{
+        position: relative;
         width: 3.33rem;
-        box-shadow: 0px 2px 3px rgba(0,0,0,.1);
+        box-shadow: 0px 3px 3px rgba(169,117,199,.5);
         border-radius: 4px;
         margin-right: .23rem;
         margin-top: .23rem;
         overflow: hidden;
+    }
+    .index_movie_list li .grade{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: .7rem;
+        height: .7rem;
+        background-color: #a975c7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .34rem;
+        font-weight: 400;
+        color: #FFF;
+        border-bottom-right-radius: 4px;
     }
     .movie_images{
         width: 3.33rem;
@@ -187,6 +217,7 @@
         font-weight: normal;
         font-size: .28rem;
         color: #a975c7;
+        margin-bottom: .15rem;
     }
     .type{
         line-height: 100%;
@@ -194,19 +225,20 @@
     .movie_message{
         padding: .2rem;
     }
-    .message{
-        margin-top: .1rem;
-    }
-    .message span{
-        font-size: .24rem;
-        color: #999;
-    }
     .movie_message .message{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
     }
+    .movie_message .message span{
+        font-size: .24rem;
+        color: #999;
+        border: 1px solid #999;
+        padding:3px 8px;
+        margin-right: 3px;
+        border-radius: 20px;
+    }
+    
 </style>
 <style>
     .swiper-pagination-bullet{

@@ -19,6 +19,11 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = Axios
 
+//评分保留一位小数点
+Vue.filter('filterGrade',function(value){
+    return value.toFixed(1)
+})
+
 Vue.use(publicJs)
 Vue.use(Loading)
 

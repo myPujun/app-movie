@@ -30,6 +30,9 @@ export default {
             ParticipatingList:[]
         }
     },
+    components:{
+        headerTop,MovieList
+    },
     created () {
         let url = `/celebrity/${this.$route.query.id}`  
         this.Api(url).then(data => {
@@ -41,8 +44,10 @@ export default {
             })
         })
     },
-    components:{
-        headerTop,MovieList
+    mounted() {
+        if(this.scroll){
+            this.scroll = ''
+        }
     },
     methods: {
         

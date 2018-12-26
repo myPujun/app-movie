@@ -42,27 +42,28 @@ exports.install = function (Vue,options){
     //滑动到底部加载数据
     Vue.prototype.scroll = function(message) {
         this.$nextTick(() => {
-            window.onscroll = () => {
-                // 距离底部时加载一次
-                let bodyContent = document.body.offsetHeight
-                let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
-                if ((window.innerHeight + scrollTop) == bodyContent) {
-                    message.MovieStart += 10
-                    let url = `${message.url}&start=${message.MovieStart}&count=10`
-                    this.Api(url).then(res => {
-                        let list = res.subjects
-                        list.forEach((item, index) => {
-                            message.addList.push(item)
+            if(message){
+                window.onscroll = () => {
+                    // 距离底部时加载一次
+                    let bodyContent = document.body.offsetHeight
+                    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
+                    if ((window.innerHeight + scrollTop) == bodyContent) {
+                        message.MovieStart += 10
+                        let url = `${message.url}&start=${message.MovieStart}&count=10`
+                        this.Api(url).then(res => {
+                            let list = res.subjects
+                            list.forEach((item, index) => {
+                                message.addList.push(item)
+                            })
+                            if (message.localName) {
+                                this.localSet(message.localName, message.addList)
+                            }
                         })
-                        if(message.localName){
-                            this.localSet(message.localName, message.addList)
-                        }
-                    })
+                    }
                 }
             }
         })
     }
-    
 }
 
 

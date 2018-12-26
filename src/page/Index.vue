@@ -1,16 +1,5 @@
 <template>
     <div class="index" ref="indexContent">
-        <div class="nav_wrap">
-            <div class="nav_content">
-                <ul class="nav_list">
-                    <li :class="{active:this_Index == index}" 
-                        v-for="key,index in navList" 
-                        @click="changeNav(index,key)" :key="index">
-                        {{key}}
-                    </li>
-                </ul>
-            </div>
-        </div>
         <div class="banner swiper-container" >
             <ul class="banner_list swiper-wrapper">
                 <li class="swiper-slide">
@@ -22,6 +11,18 @@
             </ul>
             <div class="swiper-pagination"></div>
         </div>
+        <div class="nav_wrap">
+            <div class="nav_content">
+                <ul class="nav_list">
+                    <li :class="{active:this_Index == index}" 
+                        v-for="key,index in navList" 
+                        @click="changeNav(index,key)" :key="index">
+                        {{key}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
         <ul class="index_movie_list">
             <router-link tag="li" :to="{path:'/movieDetails',query:{id:item.id}}" 
             v-for="item,index in message.addList" :key="index">
@@ -30,10 +31,8 @@
                 </div>
                 <div class="movie_message">
                     <h2 class="movie_name">{{item.title}}</h2>
-                    <div class="message">
-                        <p class="type">
-                            <span v-for="genre in item.genres">{{genre}}</span>
-                        </p>
+                    <div class="type">
+                        <span v-for="genre in item.genres">{{genre}}</span>
                     </div>
                 </div> 
                 <div class="grade">
@@ -126,23 +125,21 @@
     }
 </script>
 <style scoped>
-    .banner{
-        margin-top: .23rem;
-    }
     .banner_list li{
         height: 3rem;
         background-color: #ccc;
     }
     .nav_wrap{
         position: relative;
+        width: 6.9rem;
         height: 1rem;
+        margin: 0 auto;
     }
     .nav_content{
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        padding: 0 .3rem;
         overflow: hidden;
         height: 1rem;
     }
@@ -184,7 +181,7 @@
     .index_movie_list li{
         position: relative;
         width: 3.33rem;
-        box-shadow: 0px 3px 3px rgba(169,117,199,.5);
+        box-shadow: 0px 0px 5px rgba(169,117,199,.5);
         border-radius: 4px;
         margin-right: .23rem;
         margin-top: .23rem;
@@ -207,7 +204,7 @@
     }
     .movie_images{
         width: 3.33rem;
-        height: 4rem;
+        height: 3.5rem;
     }
     .movie_images img{
         width: 100%;
@@ -225,17 +222,17 @@
     .movie_message{
         padding: .2rem;
     }
-    .movie_message .message{
+    .movie_message .type{
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
     }
-    .movie_message .message span{
+    .movie_message span{
         font-size: .24rem;
         color: #999;
         border: 1px solid #999;
         padding:3px 8px;
-        margin-right: 3px;
+        margin-right: 5px;
         border-radius: 20px;
     }
     

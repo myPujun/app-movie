@@ -45,9 +45,7 @@ export default {
         })
     },
     mounted() {
-        if(this.scroll){
-            this.scroll = ''
-        }
+       
     },
     methods: {
         

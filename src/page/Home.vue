@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import headerTop from '@/components/Header'
+    import HeaderTop from '@/components/Header'
     import FooterNav from '@/components/Footer'
     import LeftMenu from '@/components/LeftMenu'
     import Index from '@/page/Index'
@@ -22,16 +22,14 @@
         data () {
             return {
                 changeName:'index',
+                isMenu:null
             }
         },
-        watch:{
-            
-        },
         components: {
-            headerTop,FooterNav,Index,Showing,RankingList,LeftMenu
+            HeaderTop,FooterNav,Index,Showing,RankingList,LeftMenu
         },
         created () {
-            
+           
         },
         methods:{
             changeLink(val){
@@ -47,10 +45,5 @@
     }
 </script>
 <style scoped>
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity 3s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-    }
+    
 </style>

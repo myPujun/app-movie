@@ -1,6 +1,6 @@
 <template>
     <div class="showing">
-        <movie-list :dataList="message.addList"></movie-list>
+        <movie-list :dataList="message.addList" :isRanking='false'></movie-list>
     </div>
 </template>
 <script>

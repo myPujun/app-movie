@@ -1,7 +1,8 @@
 exports.install = function (Vue,options){
     //API接口
+    let HOST = process.env.NODE_ENV === 'production' ? 'https://node-douban-api.herokuapp.com/movie' : '/douban'
     Vue.prototype.Api = function (url) {
-        var url = `/douban${url}`
+        var url = HOST+url
         return new Promise((resolve, reject) => {
             this.$http.get(url).then(res => {
                 resolve(res.data)

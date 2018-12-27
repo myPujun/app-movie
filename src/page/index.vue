@@ -22,7 +22,6 @@
                 </ul>
             </div>
         </div>
-        
         <ul class="index_movie_list">
             <router-link tag="li" :to="{path:'/movieDetails',query:{id:item.id}}" 
             v-for="item,index in message.addList" :key="index">
@@ -62,7 +61,7 @@
             activeMovieType(newValue,old){
                 this.message = {
                     MovieStart:this.activeMovieStart,
-                    url: `search?tag=${newValue}`,
+                    url: `/search?tag=${newValue}`,
                     addList:this.message.addList,
                     localName:'indexData'
                 }
@@ -72,7 +71,7 @@
         mounted() {
             this.message = {
                 MovieStart:this.activeMovieStart,
-                url: `search?tag=${this.activeMovieType}`,
+                url: `/search?tag=${this.activeMovieType}`,
                 addList:this.message.addList,
                 localName:'indexData'
             }
@@ -238,13 +237,13 @@
     
 </style>
 <style>
-    .swiper-pagination-bullet{
+    .swiper-pagination .swiper-pagination-bullet{
         position: relative;
         background:rgba(218,154,255,.3);
         border:1px solid #FFF;
         opacity: 1;
     }
-    .swiper-pagination-bullet-active{
+    .swiper-pagination .swiper-pagination-bullet-active{
         border-radius: 6px;
         width:.5rem;
         animation:myfirst .3s;
@@ -252,7 +251,7 @@
         -webkit-animation:myfirst .3s; /* Safari and Chrome */
         -o-animation:myfirst .3s; /* Opera */
     }
-    .swiper-pagination-bullet-active:after{
+    .swiper-pagination .swiper-pagination-bullet-active:after{
         position: absolute;
         content:'';
         background:#FFF;

@@ -65,8 +65,8 @@
                 
             },
             api(){
-                let url = `/douban/search?tag=${this.searchMessage}&start=0&count=10`
-                this.$http.get(url).then( res => {
+                let url = `/search?tag=${this.searchMessage}&start=0&count=10`
+                this.Api(url).then( res => {
                     if(res.data.subjects.length == 0){
                         this.isHint = true
                     }else{

@@ -67,12 +67,13 @@
             api(){
                 let url = `/search?tag=${this.searchMessage}&start=0&count=10`
                 this.Api(url).then( res => {
-                    if(res.data.subjects.length == 0){
+                    if(res.subjects.length == 0){
                         this.isHint = true
                     }else{
                         this.isHint = false
                     }
-                    this.searchList = res.data.subjects
+                    this.searchList = res.subjects
+                    console.log(this.searchList)
                 }).catch(err => {
                     console.log(err)
                 })
